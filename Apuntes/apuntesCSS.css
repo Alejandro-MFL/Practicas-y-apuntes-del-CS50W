@@ -1,0 +1,58 @@
+/*
+Puntos importantes al hablar de CSS
+
+    Orden de prioridad al aplizar estilo:
+        1. inline
+        2. id
+        3. class
+        4. type
+
+
+    Selectores de CSS
+        a, b    eleccion multiple
+        a b     seleccion descendente (selecciona descendientes tipo b que esten en un tipo a)
+        a > b   seleccion de hijo (selecciona solo los hijos directos tipo b en a)
+        a + b   seleccion de hermanos adyacentes (selecciona el elemento tipo b que este justo despues del tipo a)
+        [a=b]   seleccion de atributos (selecciona elementos que tengan el mismo valor b en el atributo a. Ejemplo: input[type="text"])
+        a:b     seleccion de pseudoclase (selecciona elementos a en el estado especial b. Ejemplo: a:focus o a:hover)
+        a::b    seleccion de pseudoelemento (selecciona un subelemento b en el elemento a. Ejemplo a::first-letter )
+
+    Responsive Design
+    Hace referencia a la escabilidad para diferentes formatos.
+    Se puede añadir que el ancho camvie automaticamente con el ancho de la pagina
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    Se pueden añadir media queries, se añade un @
+        @media (max-width: a) {...}
+        @media (min-width: b) {...}
+        
+*/
+
+
+
+
+/*Ejemplo de texto cambiando distintos elementos */
+h1 {
+    color:blue;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+
+}
+/* Ejemplo de definir estilo de un id, con #, y una clase con .*/
+#foo {
+    color: rgb(42, 180, 104);
+}
+.baz {
+    color: aquamarine;
+}
+
+/* Ejemplo de tabla*/
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td, tr {
+    border: 1px solid black;
+    padding: 5px;
+}

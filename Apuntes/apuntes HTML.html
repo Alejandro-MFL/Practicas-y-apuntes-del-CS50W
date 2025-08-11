@@ -1,0 +1,124 @@
+<!--
+    Apuntes en estructura
+-->
+
+<!DOCTYPE html>
+ <!--Declaracion de tipo-->
+
+<html lang="en">
+ <!--Declaracion de lengua y apertura de html-->
+
+<head>
+    <script src="scripts.js"></script>
+    <link href="styles.css" rel="stylesheet">
+    <title>
+        hello title
+    </title>
+</head>
+<body>
+    <!-- body se suele separar en header, main y footer-->
+    <h1 style="color: palevioletred; text-align: center" >Hello</h1>
+    <!--Solo puede haber un elemento con un id, para que lo tengan distintos elementos se añade class-->
+    <p id="foo">hello, body</p>
+    <p class="baz">hello, body</p>
+    <p class="baz">hello, body</p>
+    <!--genera una lista de puntos, ol numera-->
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <!--table genera una tabla en la que los elementos de la fila se agrupan en tr y td para las distintas columnas-->
+    <table>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th>number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>3</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <!--Ejemplo de una imagen-->
+    <img alt="Pepe" src="pepe.png">
+    <img src="cat.jpg" alt="Maomao" width="300" />
+    <!--Ejemplo de un video-->
+    <video controls muted>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+    <!-- Ejemplo de link-->
+    Visit <a href="https://pepe.html">Pepe</a>
+    <!-- Ejemplo de input para busqueda en google   -->
+    <form action="https://google.com/search" method="get">
+        <input autocomplete="off" autofocus name="q" placeholder="Query" type="search">
+        <input type="submit" value="Google Search">
+    </form>
+    <!-- Ejemplo de input para registrar emails-->
+    <form>
+        <input autocomplete="off" autofocus name="email" placeholder="Email" type="email">
+        <button>Register</button>
+    </form>
+    
+    <!--
+    REGULAR EXPRESSION
+
+    Caracteres B�sicos
+        .	Cualquier car�cter excepto salto de l�nea
+        \d	D�gito (0-9)
+        \D	No d�gito
+        \w	Letra, n�mero o _
+        \W	Cualquier cosa que no sea letra, n�mero o _
+        \s	Espacio, tabulaci�n o salto de l�nea
+        \S	No espacio
+    Cuantificadores
+        *	0 o m�s repeticiones
+        +	1 o m�s repeticiones
+        ?	0 o 1 repetici�n (opcional)
+        {n}	Exactamente n repeticiones
+        {n,}	Al menos n repeticiones
+        {n,m}	Entre n y m repeticiones
+    Anclas
+        ^	Inicio de la cadena
+        $	Final de la cadena
+        \b	L�mite de palabra
+        \B	No-l�mite de palabra
+    Conjuntos y Rangos
+        [abc]	a, b o c
+        [^abc]	Cualquier car�cter excepto a, b, c
+        [a-z]	Letras min�sculas de la a a la z
+        [A-Z]	Letras may�sculas de la A a la Z
+        [0-9]	D�gitos del 0 al 9
+        [A-Za-z0-9]	Letras y n�meros
+    Grupos y Alternancia
+        (abc)	Grupo que coincide con abc
+        `(a	b)`
+        (?:abc)	Grupo sin captura
+        (?=abc)	Lookahead positivo (seguido de abc)
+        (?!abc)	Lookahead negativo (no seguido de abc)
+
+    -->
+</body>
+
+</html>
