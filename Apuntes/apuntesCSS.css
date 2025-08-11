@@ -17,14 +17,42 @@ Puntos importantes al hablar de CSS
         a:b     seleccion de pseudoclase (selecciona elementos a en el estado especial b. Ejemplo: a:focus o a:hover)
         a::b    seleccion de pseudoelemento (selecciona un subelemento b en el elemento a. Ejemplo a::first-letter )
 
-    Responsive Design
-    Hace referencia a la escabilidad para diferentes formatos.
-    Se puede añadir que el ancho camvie automaticamente con el ancho de la pagina
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    Se pueden añadir media queries, se añade un @
-        @media (max-width: a) {...}
-        @media (min-width: b) {...}
         
+    Responsive Design
+        Hace referencia a la escabilidad para diferentes formatos.
+        Se puede añadir que el ancho camvie automaticamente con el ancho de la pagina
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        Se pueden añadir media queries, se añade un @
+            @media (max-width: a) {...}
+            @media (min-width: b) {...}
+
+        Puedes usar elementos como flexbox, para que los elementos se reajusten manteniendo su tamaño.
+            #x {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            #x > div { ... }
+
+        En vez de flexbox, puedes usar una grid como en unity,
+            #x {
+                display: grid;
+                grid-row.gap: 10px;
+                grid-template-columns: 200px 20px auto;
+            }
+            .x-item { ... }
+    
+
+    Herramientas utiles:
+        Bootstrap.com: es una biblioteca de estilos CSS
+
+        Sass, haciendo archivos .scss, nos brinda nuevas opciones como añadir variables, anidar elementos, heredar caracteristicas.
+            requiere que se compile antes ya que los navegadores no lo aceptan.
+            con:
+            sass x.scss:x.css
+            Lo puede hacer automaticamente con:
+            sass --watch x.scss:x.css
+    
 */
 
 
