@@ -66,3 +66,5 @@ Merge Conflicts:
         b = 0                               // Version remota
         >>>>> 57656c636f6d6520746f20576562  // Fin del conflicto y hash identificatorio
 */
+
+//para hacer una pagina en github añadir .github.io al nombre del repositorio al crearlo
