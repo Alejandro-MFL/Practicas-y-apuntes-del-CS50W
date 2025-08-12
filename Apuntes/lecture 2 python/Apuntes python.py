@@ -3,7 +3,14 @@
 Definicion = """
 Python es un  lenguaje de programacion de alto nivel,
  interpretado y multiparadigmatico"""
- 
+Estructura = """ 
+    imports
+
+    def main():
+    definicion de funciones
+
+    main()
+"""
  
 # Tipos de variables y estructuras de datos basicas
 Variables = """
@@ -84,9 +91,9 @@ fors = """
 """
 trys = """ 
     try:
-        x = y
-    except ValueError:
-        print("nop")
+        a = b
+    except x:           # x es sustituible por el error que necesites 
+        print("nop")      (ValueError, ZeroDivisionError, etc)
 """
 whiles = """ 
     i = 0
@@ -108,10 +115,29 @@ imports = """
 """
 
 
-# Clases
-definicion = """ 
+# Clases y tecnicas especiales
+classs = """ 
 # Creas objetos con parametros y funciones preestablecidas
     class x():
         def __init__(self, x):      # Esta funcion se acciona cada vez que se crea una clase
             self.x = x              # self representa el nuevo de la clase x
+"""
+decorators = """ 
+# Son funciones que tomando una funcion, la modifica y la devuelve
+    def decorator1(x):
+        def y():
+            x()
+            print(x ahora es y)
+        return y
+
+    @decorator1                 # De esta forma se agrega el decorador para que se llame                 
+    def hello():                  automaticamente cuando se llame la funcion hello
+        print(h)
+"""
+lambdas = """ 
+# Es un tipo de funcion compacta de un solo uso
+    lambda x: x.y               # Esto define una funcion con parametro x y un return de y
+    ==
+    def f(x):                   # Es el equivalente de un uso de f,  
+        return x.y                se usa para dar una key o similares
 """
