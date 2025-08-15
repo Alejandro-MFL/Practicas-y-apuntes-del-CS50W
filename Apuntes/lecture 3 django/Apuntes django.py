@@ -38,13 +38,83 @@ Elementos = """
                 │   └── __init__.py
                 ├── models.py           # 13. aqui defines las clases de datos (el ORM). Cada clase es igual a una tabla en la base de datos.
                 ├── tests.py            # 14. donde defines tests unitarios
-                └── views.py            # 15. aqui va la logica que responde a las requests
+                ├── views.py            # 15. aqui va la logica que responde a las requests
+                │ * No se crean automaticamente pero seran necesarios
+                ├── templates           # 16. carpeta donde guardar los archivos HTML
+                ├── static              # 17. archivos staticos como imagenes
+                └── urls.py             # 18. enlaza rutas especificas de esta app con sus vistas
+"""
+views = """ 
+    Es la funcion o clase que recibe una petcion HTTP y que devuelve una vista.
+    Esa vista puede ser:
+        - Vista basada en funcion (FBV = Function Based View)
+        ###
+            from django.http import HttpResponse
 
+            def hola(request):
+                return HttpResponse("Hola desde Django 👋")
+            def pepe(request, name):
+                return render( request , "uffs/index.html",
+                    {"name": name.capitalize()                  
+                })
+        ###
+                
+        - Vista basada en clase (CBV = Class Based View)
+        ###
+            from django.views import View
+            from django.http import HttpResponse
+
+            class HolaView(View):
+                def get(self, request):
+                    return HttpResponse("Hola desde una Class-Based View")        
+        ###
+
+        - Vistas genéricas (Generic Views)
+        ###
+            from django.views.generic import ListView
+            from .models import Post
+
+            class PostListView(ListView):
+                model = Post
+                template_name = "blog/post_list.html"
+        ###
+
+"""
+urls = """
+# Aqui se colocan las rutas propias, las de el proyecto y las de la aplicacion
+Ejemplo:
+    -App:
+    ###
+        from django.urls import path
+        from . import views   # Importamos las vistas de la misma app
+
+        urlpatterns = [
+            path('', views.index, name='index'),                    # /blog/
+            path('post/<int:id>/', views.ver_post, name='post'),    # /blog/post/5/
+        ]
+    ###
+    -Proyecto:
+    ###
+        from django.contrib import admin
+        from django.urls import path, include
+        from . import views                             # opcional: si tienes vistas directas en el proyecto
+
+        urlpatterns = [
+            path('admin/', admin.site.urls),            # panel admin            
+            path('', views.home, name='home'),          # página raíz del proyecto
+            path('blog/', include('blog.urls')),        # delega en la app "blog"
+            path('tienda/', include('tienda.urls'))     # delega en la app "tienda"
+        ]
+    ###
 
 """
 
 
-
+# Funciones basicas
+migraciones = """ 
+    Una migración en Django es un archivo de instrucciones que describe cómo debe transformarse
+    la base de datos para reflejar los cambios que hiciste en tus modelos
+"""
 
 # Inicio de Django 
 activarEntorno = """ 
@@ -54,7 +124,7 @@ activarEntorno = """
         - Scripts\activate            # CMD
             Aparecera (venv) al final cuando esta activo   
 """
-FuncionesIniciales = """ 
+funcionesIniciales = """ 
     django-admin startproject PROJECT_NAME      # Comenzar proyecto
     python manage.py runserver                  # Activar el servidor
     python manage.py startapp APP_NAME          # Crear aplicacion 
