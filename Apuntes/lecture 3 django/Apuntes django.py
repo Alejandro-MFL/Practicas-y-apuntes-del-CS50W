@@ -129,3 +129,24 @@ funcionesIniciales = """
     python manage.py runserver                  # Activar el servidor
     python manage.py startapp APP_NAME          # Crear aplicacion 
 """
+# DTL (django template language) ~ Jinja2
+diferencias = """ 
+    El lenguaje es muy similar, Jinja2 se desarrollo a partir de DTL por lo que son muy similares, 
+    tienen algunas funciones, filtros y tags distintos
+"""
+sintaxis = """ 
+if
+    {% if lista %}
+        x
+    {% else %}
+        y
+    {% endif %}
+for
+    {% for item in lista %}
+        x
+    {% endfor %}
+insercion de valor
+     {{ nombre }}
+
+
+"""
