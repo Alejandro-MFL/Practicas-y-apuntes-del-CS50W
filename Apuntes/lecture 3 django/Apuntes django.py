@@ -79,6 +79,29 @@ views = """
                 template_name = "blog/post_list.html"
         ###
 
+    Creacion de formularios  
+        ###
+        from django import forms    
+
+        class NuevoFormulario(forms.Form):
+            elemento = forms.CharField(label="Nuevo Elemento")
+            prioridad = forms.IntegerField(label="Prioridad", min_value=1, max_value=10)
+
+        # Con esto se comprueba que la informacion es correcta por parte del servidor
+        def x(request):
+            if request.method == "POST":
+                form = NuevoFormulario(request.POST)
+                if form.is_valid():
+                    elemento = form.cleaned_data["elemento"]    # Esto asegura que los datos estan en una forma correcta
+                    elementos.append(elemento)
+                    return HttpResponseRedirect(reverse("appName :index"))
+                else:
+                    return render(request, direccionDelhtmlQueEnviaElFormulario, {"form": form})
+
+            return render(request, direccionDelhtmlQueEnviaElFormulario, {"form": NuevoFormulario() })
+        ###
+
+
 """
 urls = """
 # Aqui se colocan las rutas propias, las de el proyecto y las de la aplicacion
@@ -123,11 +146,13 @@ static = """
         CSS : <link href="{% static 'direccion/styles.css' %}" rel="stylesheet">
 """
 
+
 # Funciones basicas
 migraciones = """ 
     Una migración en Django es un archivo de instrucciones que describe cómo debe transformarse
     la base de datos para reflejar los cambios que hiciste en tus modelos
 """
+
 
 # Inicio de Django 
 activarEntorno = """ 
@@ -142,6 +167,8 @@ funcionesIniciales = """
     python manage.py runserver                  # Activar el servidor
     python manage.py startapp APP_NAME          # Crear aplicacion 
 """
+
+
 # DTL (django template language) ~ Jinja2
 diferencias = """ 
     El lenguaje es muy similar, Jinja2 se desarrollo a partir de DTL por lo que son muy similares, 
@@ -158,6 +185,8 @@ if
 for
     {% for item in lista %}
         x
+    {% empty %}
+        no item
     {% endfor %}
 
 """
