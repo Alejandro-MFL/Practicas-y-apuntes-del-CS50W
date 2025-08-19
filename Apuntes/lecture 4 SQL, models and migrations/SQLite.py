@@ -1,4 +1,4 @@
-# base
+# Base
 valores = """ 
 # Guardados:
     NULL = Ausencia de valor
@@ -92,5 +92,59 @@ indexar = """
         INSERT, UPDATE o DELETE
     - Pros: Al permitir busquedas binarias todas las queries son exponencialmente mas eficientes respecto al tamaño
                 #WHERE, JOIN, ORDER BY, o GROUP BY
+
+"""
+
+# Funciones
+agregacion = """ 
+    COUNT(x)	                #Cuenta filas (o no nulas si se pasa columna)	
+        SELECT COUNT(*) FROM clientes;
+    SUM(x)	                    #Suma valores	
+        SELECT SUM(edad) FROM clientes;
+    AVG(x)	                    #Promedio	
+        SELECT AVG(edad) FROM clientes;
+    MIN(x)	                    #Valor mínimo	
+        SELECT MIN(edad) FROM clientes;
+    MAX(x)	                    #Valor máximo	
+        SELECT MAX(edad) FROM clientes;
+    TOTAL(x)	                #Como SUM, pero siempre REAL	
+        SELECT TOTAL(sueldo) FROM empleados;
+    GROUP_CONCAT(x, ',')	    #Une valores en un string	
+        SELECT GROUP_CONCAT(nombre, ', ') FROM clientes;
+"""
+texto = """ 
+    UPPER(x)	                #Convierte a mayúsculas	
+        SELECT UPPER(nombre) FROM clientes;
+    LOWER(x)	                #Convierte a minúsculas	
+        SELECT LOWER(nombre) FROM clientes;
+    LENGTH(x)	                #Longitud de la cadena	
+        SELECT LENGTH(nombre) FROM clientes;
+    TRIM(x)	                    #Quita espacios ambos lados	
+        SELECT TRIM(' hola '); → 'hola'
+    LTRIM(x)	                #Quita espacios a la izquierda	
+        SELECT LTRIM(' hola');
+    RTRIM(x)	                #Quita espacios a la derecha	
+        SELECT RTRIM('hola ');
+    SUBSTR(x,inicio,long)	    #Subcadena	
+        SELECT SUBSTR(nombre,1,3) FROM clientes;
+    REPLACE(x,ant,nuevo)	    #Reemplaza texto	
+        SELECT REPLACE(nombre,'a','@');
+    INSTR(x,y)	                #Posición de y en x	
+        SELECT INSTR('barcelona','cel'); → 4
+"""
+matematicas = """ 
+    ABS(x)	                    #Valor absoluto	
+        SELECT ABS(-42); → 42
+    ROUND(x,d)	                #Redondea a d decimales	
+        SELECT ROUND(3.14159,2); → 3.14
+    SIGN(x)	                    #Signo: -1, 0, 1	
+        SELECT SIGN(-5); → -1
+    RANDOM()	                #Aleatorio entero	
+        SELECT RANDOM();
+    RANDOM()%n	                #Aleatorio 0-n	
+        SELECT RANDOM()%100;
+"""
+fechaYHora = """ 
+
 
 """
