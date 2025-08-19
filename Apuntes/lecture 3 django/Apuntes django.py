@@ -88,6 +88,7 @@ Ejemplo:
         from django.urls import path
         from . import views   # Importamos las vistas de la misma app
 
+        app_name = "search"
         urlpatterns = [
             path('', views.index, name='index'),                    # /blog/
             path('post/<int:id>/', views.ver_post, name='post'),    # /blog/post/5/
@@ -146,19 +147,38 @@ diferencias = """
     El lenguaje es muy similar, Jinja2 se desarrollo a partir de DTL por lo que son muy similares, 
     tienen algunas funciones, filtros y tags distintos
 """
-sintaxis = """ 
+sintaxisLoops = """ 
 if
     {% if lista %}
         x
     {% else %}
         y
     {% endif %}
+
 for
     {% for item in lista %}
         x
     {% endfor %}
-insercion de valor
-     {{ nombre }}
 
+"""
+sintaxisEspeciales= """ 
+insercion de valor
+    {{ nombre }}
+
+enlace
+    <a href = "{% url 'x' %}"> ir a x </a>
+    # x es el nombre de un path establecido en urls, tambien se puede introducir
+    # el nombre de la app previamente establecido en urls ''
+"""
+
+
+# Seguridad
+csrf_token = """ 
+# Son codigos de seguridad para evitar peticiones falsas a usuarios ya autentificados, en django esta 
+  por defecto, genera un codigo especial de forma automatica y para cualquier metodo vulnerable 
+  (PORT, PUT, DELETE , PATCH) es requerido, por lo que se debe incorporar el tag especial. Si no se 
+  hace, la pagina dara el error 403:
+    -html            {% csrf_token %}
+    -javascript      "X-CSRFToken": getCookie("csrftoken")
 
 """
