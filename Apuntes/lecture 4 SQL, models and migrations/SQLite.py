@@ -60,6 +60,15 @@ ver = """
         Con JOIN pueden unirse para que salgan juntas:
             #SELECT * FROM clientes JOIN consumidores ON clientes.id = consumidores.show_id;
         los muestra una al lado de la otra
+        
+        JOIN / INNER JOIN
+            Devuelve solo las filas donde existe coincidencia en ambas tablas
+        LEFT OUTER JOIN
+            Devuelve todas las filas de la tabla izquierda , y las coincidencias con la derecha 
+        RIGHT OUTER JOIN
+            Devuelve todas las filas de la tabla derecha , y las coincidencias con la izquierda 
+        FULL OUTER JOIN
+            Devuelve todas las filas de ambas tablas
 """
 eliminar = """ 
 #Para eliminar una tabla:
@@ -97,54 +106,82 @@ indexar = """
 
 # Funciones
 agregacion = """ 
-    COUNT(x)	                #Cuenta filas (o no nulas si se pasa columna)	
+    COUNT(x)	                # Cuenta filas (o no nulas si se pasa columna)	
         SELECT COUNT(*) FROM clientes;
-    SUM(x)	                    #Suma valores	
+    SUM(x)	                    # Suma valores	
         SELECT SUM(edad) FROM clientes;
-    AVG(x)	                    #Promedio	
+    AVG(x)	                    # Promedio	
         SELECT AVG(edad) FROM clientes;
-    MIN(x)	                    #Valor mínimo	
+    MIN(x)	                    # Valor mínimo	
         SELECT MIN(edad) FROM clientes;
-    MAX(x)	                    #Valor máximo	
+    MAX(x)	                    # Valor máximo	
         SELECT MAX(edad) FROM clientes;
-    TOTAL(x)	                #Como SUM, pero siempre REAL	
+    TOTAL(x)	                # Como SUM, pero siempre REAL	
         SELECT TOTAL(sueldo) FROM empleados;
-    GROUP_CONCAT(x, ',')	    #Une valores en un string	
+    GROUP_CONCAT(x, ',')	    # Une valores en un string	
         SELECT GROUP_CONCAT(nombre, ', ') FROM clientes;
 """
 texto = """ 
-    UPPER(x)	                #Convierte a mayúsculas	
+    UPPER(x)	                # Convierte a mayúsculas	
         SELECT UPPER(nombre) FROM clientes;
-    LOWER(x)	                #Convierte a minúsculas	
+    LOWER(x)	                # Convierte a minúsculas	
         SELECT LOWER(nombre) FROM clientes;
-    LENGTH(x)	                #Longitud de la cadena	
+    LENGTH(x)	                # Longitud de la cadena	
         SELECT LENGTH(nombre) FROM clientes;
-    TRIM(x)	                    #Quita espacios ambos lados	
+    TRIM(x)	                    # Quita espacios ambos lados	
         SELECT TRIM(' hola '); → 'hola'
-    LTRIM(x)	                #Quita espacios a la izquierda	
+    LTRIM(x)	                # Quita espacios a la izquierda	
         SELECT LTRIM(' hola');
-    RTRIM(x)	                #Quita espacios a la derecha	
+    RTRIM(x)	                # Quita espacios a la derecha	
         SELECT RTRIM('hola ');
-    SUBSTR(x,inicio,long)	    #Subcadena	
+    SUBSTR(x,inicio,long)	    # Subcadena	
         SELECT SUBSTR(nombre,1,3) FROM clientes;
-    REPLACE(x,ant,nuevo)	    #Reemplaza texto	
+    REPLACE(x,ant,nuevo)	    # Reemplaza texto	
         SELECT REPLACE(nombre,'a','@');
-    INSTR(x,y)	                #Posición de y en x	
+    INSTR(x,y)	                # Posición de y en x	
         SELECT INSTR('barcelona','cel'); → 4
 """
 matematicas = """ 
-    ABS(x)	                    #Valor absoluto	
+    ABS(x)	                    # Valor absoluto	
         SELECT ABS(-42); → 42
-    ROUND(x,d)	                #Redondea a d decimales	
+    ROUND(x,d)	                # Redondea a d decimales	
         SELECT ROUND(3.14159,2); → 3.14
-    SIGN(x)	                    #Signo: -1, 0, 1	
+    SIGN(x)	                    # Signo: -1, 0, 1	
         SELECT SIGN(-5); → -1
-    RANDOM()	                #Aleatorio entero	
+    RANDOM()	                # Aleatorio entero	
         SELECT RANDOM();
-    RANDOM()%n	                #Aleatorio 0-n	
+    RANDOM()%n	                # Aleatorio 0-n	
         SELECT RANDOM()%100;
 """
 fechaYHora = """ 
+    date(timestring,mod)	    # Devuelve fecha	
+        SELECT date('now'); → 2025-08-19
+    time(timestring,mod)	    # Devuelve hora	
+        SELECT time('now');
+    datetime(timestring,mod)	# Fecha + hora	
+        SELECT datetime('now','+1 day');
+    julianday(timestring)	    # Días julianos	
+        SELECT julianday('now');
+    strftime(fmt,time)	        # Formato personalizado	
+        SELECT strftime('%Y-%m-%d', 'now');
+"""
+control = """
+    COALESCE(x,y,...)	        # Primer valor no nulo	
+        SELECT COALESCE(email,'sin email') FROM clientes;
+    IFNULL(x,y)	                # y si x es NULL	
+        SELECT IFNULL(telefono,'N/A') FROM clientes;
+    NULLIF(x,y)	                # NULL si x=y	
+        SELECT NULLIF(5,5); → NULL
+    TYPEOF(x)	                # Tipo real del valor	
+        SELECT TYPEOF(42); → integer
+    HEX(x)	                    # Convierte a hexadecimal	
+        SELECT HEX('abc'); → 616263
+    QUOTE(x)	                # Devuelve cadena SQL escapada	
+        SELECT QUOTE("O'Reilly"); → 'O''Reilly'
+    ZEROBLOB(n)	                # BLOB de n bytes en 0	
+        SELECT ZEROBLOB(4);
 
 
 """
+
+

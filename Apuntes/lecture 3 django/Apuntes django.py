@@ -8,7 +8,6 @@ respuestas = """
     500 Internal Server Error
 """
 
-
 # Estructura basica de Django
 Elementos = """ 
 # Cuando creas un proyecto inicia con una estructura basica, la cual sera el marco
@@ -145,14 +144,29 @@ static = """
     Para usar un elementos de static has de poner en la primera linea {% load static %}
         CSS : <link href="{% static 'direccion/styles.css' %}" rel="stylesheet">
 """
-
-
-# Funciones basicas
-migraciones = """ 
-    Una migración en Django es un archivo de instrucciones que describe cómo debe transformarse
-    la base de datos para reflejar los cambios que hiciste en tus modelos
+models = """ 
+#Es donde se definen los modelos que son las clases a traves de las cuales
+    se manipula la base de datos.
+En el apartado SQL modelos y migraciones estan desarrollados
 """
 
+# Funciones basicas
+shell = """ 
+    a traves de python manage.py shell puedes abrir el terminal para escribir python directamente
+    Ejemplo:
+        >>> from blog.models import Post
+        >>> Post.objects.create(titulo="Hola desde shell", contenido="Probando")
+        <Post: Hola desde shell>
+
+        >>> Post.objects.count()
+        1
+
+        >>> post = Post.objects.get(id=1)
+        >>> post.titulo
+        'Hola desde shell'
+
+
+"""
 
 # Inicio de Django 
 activarEntorno = """ 
@@ -167,7 +181,6 @@ funcionesIniciales = """
     python manage.py runserver                  # Activar el servidor
     python manage.py startapp APP_NAME          # Crear aplicacion 
 """
-
 
 # DTL (django template language) ~ Jinja2
 diferencias = """ 
@@ -200,7 +213,6 @@ enlace
     # el nombre de la app previamente establecido en urls ''
 """
 
-
 # Seguridad
 csrf_token = """ 
 # Son codigos de seguridad para evitar peticiones falsas a usuarios ya autentificados, en django esta 
@@ -211,3 +223,91 @@ csrf_token = """
     -javascript      "X-CSRFToken": getCookie("csrftoken")
 
 """
+
+########################             SQL            ########################
+
+# Modelos y migraciones
+modelo = """ 
+    Es una clase de python que define la estructura u comportamiento de los datos. Consta de tres partes:
+        - Cada modelo es una tabla de la base de datos
+        - Cada atributo de la clase es una columna
+        - Cada instancia es una fila
+
+    # Creacion del modelo
+        class Modelo(models.Model):
+            atributoA = models.charField(max_length=64)
+            atributoB = models.ForeignKey(Modelo2, on_delete=models.CASCADE, related_name="AtributoX")
+            atributoC = models.charField(max_length=64)
+
+        def __str__(self):              # Al ser una clase se le pueden definir logica dentro
+        return self.atributoA             __str__ define como se muestra el objeto la consola
+"""
+CamposModelo = """ 
+    CharField(max_length=...)        # texto corto.
+    TextField()                      # texto largo.
+    IntegerField()                   # enteros.
+    FloatField() / DecimalField()    # decimales.
+    BooleanField()                   # verdadero/falso.
+    DateTimeField()                  # fecha y hora.
+    EmailField(), URLField()         # validaciones específicas.
+    ForeignKey()                     # relación muchos-a-uno.
+    ManyToManyField()                # relación muchos-a-muchos.
+    OneToOneField()                  # relación uno-a-uno.
+
+"""
+parametrosModelo = """ 
+comunes o casi:
+    null	        #Permite NULL en la base de datos	
+    edad = models.IntegerField(null=True)
+    blank	        #Permite campo vacío en formularios	
+    bio = models.TextField(blank=True)
+    default	        #Valor por defecto	
+    activo = models.BooleanField(default=True)
+    unique	        #Valor único en la tabla	
+    email = models.EmailField(unique=True)
+    choices	        #Lista de opciones permitidas	
+    estado = models.CharField(max_length=1, choices=[("B","Borrador"),("P","Publicado")])
+    db_index	    #Crea un índice en la columna	
+    codigo = models.CharField(max_length=20, db_index=True)
+    verbose_name	#Nombre legible en el admin	
+    precio = models.DecimalField(..., verbose_name="Precio (€)")
+    help_text	    #Texto de ayuda en admin/formularios	
+    email = models.EmailField(help_text="Introduce tu correo")
+relacion:
+    on_delete           # Obligatorio en Django ≥ 2.0, que ocurre si se elimina el origen
+         models.CASCADE      # elimina también el objeto hijo.
+        models.PROTECT       # impide borrar si hay referencias (lanza error).
+        models.SET_NULL      # pone NULL (requiere null=True).
+        models.SET_DEFAULT   # pone el valor por defecto.
+        models.DO_NOTHING    # no hace nada (puede romper integridad).
+
+    related_name        # Nombre del atributo inverso para acceder desde el modelo relacionado       
+    related_query_name  # Nombre alternativo para usar en consultas inversas
+    to_field            # Permite enlazar la relación a una columna distinta de la PK
+    through             # Define una tabla intermedia personalizada en relaciones muchos-a-muchos   
+    symmetrical         # Establece en relacion ManyToMany si las relaciones implican bidireccionalidad
+        = False or True
+    
+    """     
+migracion = """ 
+# Como en django no manipulas directamente las bases de datos, manipulas los modelos, 
+    generas una migracion, un archivo que da las instrucciones para traducir el modelo 
+    a la sintaxis de la base de datos. 
+    Despues procedes con la migracion, siguiendo las instruciones, realizas los cambios en la base de datos 
+"""
+cicloMigracion = """ 
+    - Definir modelo
+    - Crear migracion
+        python manage.py makemigrations
+    - Aplicar migracion
+        python manage.py migrate
+
+    Las migraciones se guardan en django-migrations, se pueden ver por:
+        python manage.py showmigrations
+    o una concreta con: 
+        python manage.py sqlmigrate app_name 0001
+"""
+
+
+
+
