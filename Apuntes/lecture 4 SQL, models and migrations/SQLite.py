@@ -1,0 +1,96 @@
+# base
+valores = """ 
+# Guardados:
+    NULL = Ausencia de valor
+    INTEGER = numeros enteros de entre 1 a 8 bytes
+    REAL = numeros decimales 8 bytes
+    TEXT = texto almacenado como UTF-8 o 16
+    BOLB = datos en binario sin interpretar
+"""
+inicio = """ 
+    # Para importar elementos de un csv, es necesario primero ".mode csv", si se hace manualmente creando las tablas, 
+      la primera linea sera usada como elemento de la tabla
+
+    .mode csv
+    .import clientes.csv clientes
+    
+"""
+
+# Manipulacion de tablas
+crear = """ 
+     Crear tablas
+    CREATE TABLE clientes (
+        id INTEGER,
+        nombre TEXT,
+        tiempo NUMERIC,
+        correo TEXT,
+        PRIMARY KEY (ID)
+    ); 
+    #Se pueden vincular tablas con PRYMARY y FOREIGN(PRIMARY KEY se puede usar sirectamente)
+"""
+ver = """ 
+# Para ver todas las tablas de una base
+    .tables
+
+# Para ver la informacion de una tabla 
+    PRAGMA table_info(clientes);
+    # Describe una tabla con los siguientes elementos
+        Columna	    Significado
+        cid	        Índice de la columna (0, 1, 2...)
+        name	        Nombre de la columna
+        type	        Tipo de dato (TEXT, INTEGER, etc.)
+        notnull	    ¿Puede ser nulo? (1 = NO, 0 = sí)
+        dflt_value	    Valor por defecto (si tiene alguno)
+        pk	            ¿Es clave primaria? (1 = sí, 0 = no)
+
+        
+# Para ver la estructura de una tabla
+    .schema nombreTabla
+
+# Para acceder a la informacion de una tabla
+    SELECT * FROM clientes WHERE ciudad = 'Madrid' AND id < 70;
+
+    SELECT * FROM clientes WHERE (ciudad = 'Madrid' or ciudad = 'Barcelona') AND correo LIKE '%gmail.com';
+    
+    SELECT ciudad, COUNT(*) AS n FROM clientes GROUP BY ciudad ORDER BY n DESC LIMIT 4;
+        #DESC descendiente ASC ascendente
+
+
+    # Se pueden vincular tablas con PRYMARY y FOREIGN(PRIMARY KEY se puede usar ade una)
+        Con JOIN pueden unirse para que salgan juntas:
+            #SELECT * FROM clientes JOIN consumidores ON clientes.id = consumidores.show_id;
+        los muestra una al lado de la otra
+"""
+eliminar = """ 
+#Para eliminar una tabla:
+    DROP TABLE IF EXISTS clientes;
+
+#Ejemplo de eleminar datos
+    DELETE FROM clientes WHERE ciudad IS NOT NULL;
+"""
+añadir = """ 
+#insercion de datos:
+    INSERT INTO clientes(nombre, correo) VALUES
+    ('Ana García', 'ana@example.com'),
+    ('Luis Pérez', 'luis@example.com');    
+    #Las columnas no rellenas tendran el valor de NULL
+
+# Modificacion de datos con UPDATE:
+    UPDATE clientes SET correo = 'nuevo@email.com' WHERE nombre = 'Ana García';
+
+"""
+indexar = """ 
+# Sirve para mejorar la eficiencia de procesamiento a costa del espacio, 
+  crea una lista de pointers con estructura apta para busqueda binaria.
+  Esto es muy efectivo pero aumenta enormemente el espacio ocupado
+
+    CREATE INDEX title_index ON clientes (correo);
+        CREATE UNIQUE INDEX para que no se dubliquen 
+
+# Implicaciones: crea un indice dentro del archivo con forma de binaria para busquedas mas rapidas,
+    - Contras: un mayor gasto de espacio en el archivo(relativamente alto), con un mayor costo al modificar las listas 
+        INSERT, UPDATE o DELETE
+    - Pros: Al permitir busquedas binarias todas las queries son exponencialmente mas eficientes respecto al tamaño
+                #WHERE, JOIN, ORDER BY, o GROUP BY
+
+"""
