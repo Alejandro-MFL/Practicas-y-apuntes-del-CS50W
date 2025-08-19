@@ -108,7 +108,19 @@ Ejemplo:
     ###
 
 """
-
+templates = """ 
+# Es la carpeta en la que se guardan los distintos archivos HTML, tanto los modelos como los deribados
+    Para realizar un modelo, has de definir las zonas que son modificables:
+        {% block head %}{% endblock %}
+    Despues para usarlo de patron, en el derivado usa al principio 
+        {% extends "direccion/nombrePatron.html" %}
+        {% block head %} x {% endblock %}
+    Tendra todo lo establecido en el modelo y lo añadido en el deribado.    
+"""
+static = """ 
+    Para usar un elementos de static has de poner en la primera linea {% load static %}
+        CSS : <link href="{% static 'direccion/styles.css' %}" rel="stylesheet">
+"""
 
 # Funciones basicas
 migraciones = """ 
