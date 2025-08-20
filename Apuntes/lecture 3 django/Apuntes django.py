@@ -140,7 +140,7 @@ templates = """
         {% block head %} x {% endblock %}
     Tendra todo lo establecido en el modelo y lo añadido en el deribado.    
 """
-static = """ 
+statics = """ 
     Para usar un elementos de static has de poner en la primera linea {% load static %}
         CSS : <link href="{% static 'direccion/styles.css' %}" rel="stylesheet">
 """
@@ -148,6 +148,51 @@ models = """
 #Es donde se definen los modelos que son las clases a traves de las cuales
     se manipula la base de datos.
 En el apartado SQL modelos y migraciones estan desarrollados
+"""
+admins = """ 
+# Su funcion es conectar los modelos con la aplicacion de administrador que ya tiene Django
+    puede alterar la forma en la es estos son mostrados.
+    A traves de crear clases de administracion de modelo podemos personalizar como sale, orden, filtros etc
+    
+    Ejemplo:
+    ###
+    from .models import x,y
+
+    class yAdmin(admin.ModelAdmin):
+        list_display = ("id", "y" , "x")
+
+    admin.site.register(x)
+    admin.site.register(y, yAdmin)
+
+    ###
+
+    Opciones de ModelAdmin:    
+    - Visualización en la lista
+        list_display                    # columnas que se muestran en la lista.
+        list_display_links              # cuáles de esas columnas son clicables.
+        list_editable                   # cuáles se pueden editar en la lista sin entrar al detalle.
+        ordering                        # orden por defecto de la lista.
+        list_per_page                   # número de filas por página. 
+    - Filtros y búsquedas
+        list_filter                     # crea filtros en la barra lateral.
+        search_fields                   # activa un buscador arriba.
+        date_hierarchy                  # navegación jerárquica por fechas.
+    - Formularios de edición
+        fields                          # ordena y limita los campos del formulario.
+        exclude                         # oculta campos.
+        readonly_fields                 # campos visibles pero no editables.
+        fieldsets                       # organiza el formulario en secciones.
+    - Relaciones
+        raw_id_fields                   # muestra un cuadro de búsqueda en lugar de un desplegable enorme (útil en ForeignKey).
+        autocomplete_fields             # lo mismo pero con autocompletado.
+        filter_horizontal               # para campos ManyToMany, interfaz más cómoda.
+        filter_vertical                 # para campos ManyToMany, interfaz más cómoda.
+    - Acciones
+    actions                             # define acciones personalizadas en lote.
+    - Otras opciones útiles
+        prepopulated_fields             # autocompletar un campo a partir de otro (ej. slug desde título).
+        save_on_top                     # pone botones de guardar también arriba.
+        show_full_result_count          # muestra el número total de resultados
 """
 
 # Funciones basicas
@@ -167,6 +212,58 @@ shell = """
 
 
 """
+usuarios = """ 
+# Django crea una tabla llamada auth_user:
+    Elementos mas importantes de la tabla auth_user
+        - username
+        - password 
+        - email
+        - first_name,
+        - last_name
+        - is_staff                  # puede entrar al admin
+        - is_superuser              # permisos totales
+        - is_active                 # activo o deshabilitado
+        - last_login, date_joined
+
+    La contraseña se guarda siempre por defecto con un sistema PBKDF2 + SHA256 
+     con un hash unidireccional con sal. 
+     Esto hace que todas las contraseñas tengan un tiempo relativo muy similar, evitando ataques por tiempo 
+
+    El sistema de login y logout viene implementado, se puede añadir a views
+        ###
+        from django.contrib.auth import views as auth_views
+
+        urlpatterns = [
+            path("login/", auth_views.LoginView.as_view(), name="login"),
+            path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+        ]
+        ###
+
+    Ejemplo de login y logout:
+        ###
+        from django.contrib.auth import authenticate, login, logout
+
+
+        user = authenticate(request, username="pepe", password="1234")
+        if user is not None:
+            login(request, user)  
+        else:
+            print("Usuario o contraseña incorrectos")
+
+        logout(request)
+        ###
+    
+    Ejemplo de chequeo de autentificacion:
+        ###
+        def dashboard(request):
+            if request.user.is_authenticated:
+                return HttpResponse(f"Bienvenido {request.user.username}")
+            else:
+                return HttpResponse("Por favor inicia sesión")
+        ###
+     
+"""
+
 
 # Inicio de Django 
 activarEntorno = """ 
