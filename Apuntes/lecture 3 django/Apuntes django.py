@@ -405,6 +405,129 @@ cicloMigracion = """
         python manage.py sqlmigrate app_name 0001
 """
 
+########################          javascript         ########################
+
+# Dom (Document Object Model)
+document = """ 
+#funciones importantes de document: 
+
+    Seleccionar elementos:
+        getElementById(id)              # selecciona un elemento por su id.
+            let titulo = document.getElementById("titulo");
+        getElementsByClassName(clase)   # colección de elementos con esa clase.
+            let items = document.getElementsByClassName("item");
+        getElementsByTagName(tag)       # por etiqueta (div, p, ul…).
+            let divs = document.getElementsByTagName("div");
+        querySelector(selector)         # primer elemento que cumple el selector CSS.
+            let boton = document.querySelector(".btn-primary");
+        querySelectorAll(selector)      # todos los elementos que cumplen el selector CSS.
+            let links = document.querySelectorAll("a[href^='http']");
+
+    Crear y modificar elementos:
+        createElement(tag)          # crea un nodo HTML.
+            let nuevoDiv = document.createElement("div");
+        createTextNode(texto)       # crea un nodo de texto.
+            let texto = document.createTextNode("Hola mundo");
+            nuevoDiv.appendChild(texto);
+        appendChild(nodo)           # añade un hijo al final.
+            document.body.appendChild(nuevoDiv);
+        removeChild(nodo)           # elimina un hijo.
+            document.body.removeChild(nuevoDiv);
+
+    Eventos:
+        Puedes asignar eventos a elementos del DOM:
+            ###
+            let boton = document.getElementById("miBoton");
+            boton.addEventListener("click", function() {
+            alert("Botón pulsado");
+            });
+            ###          
+
+    Propiedades del documento:
+        document.title          # título de la página
+        document.URL            # URL actual
+        document.domain         # dominio
+        document.cookie         # cookies 
+        document.forms          # lista de formularios
+        document.images         # lista de imágenes
+
+    Acceso rápido al contenido:
+        innerHTML                    # HTML interno de un elemento
+            document.getElementById("contenido").innerHTML = "<b>Nuevo texto</b>";
+        innerText / textContent      # solo texto, sin HTML
+            document.getElementById("contenido").textContent = "Nuevo texto";
+            
+            
+""" 
+eventos = """ 
+    Eventos de ratón:
+        click               # clic izquierdo.
+        dblclick            # doble clic.
+        mousedown           # cuando se presiona el botón del ratón.
+        mouseup             # cuando se suelta.
+        mousemove           # cuando se mueve el ratón.
+        mouseenter          # entra en un elemento (no burbujea).
+        mouseleave          # sale de un elemento (no burbujea).
+        mouseover           # pasa por encima (sí burbujea).
+        mouseout            # se va de un elemento (sí burbujea).
+        contextmenu         # clic derecho.
+    
+    Eventos de teclado:
+      # En estos eventos tienes acceso a la propiedad .key y .code.
+        keydown             # al presionar una tecla (antes de soltar).
+        keyup               # al soltar la tecla.
+        keypress            # (obsoleto, usar keydown).
+    
+    
+    Eventos de formulario
+        submit          # cuando se envía un formulario.
+        reset           # cuando se resetea.
+        focus           # un input recibe foco.
+        blur            # un input pierde foco.
+        change          # cambia el valor de un input, select o textarea.
+        input           # cambia el valor de un input en tiempo real (cada tecla).
+
+    Eventos de ventana/documento:
+        load                     # cuando la página ha cargado.
+        DOMContentLoaded         # cuando el DOM está listo (sin esperar imágenes).
+        resize                   # cuando se cambia el tamaño de la ventana.
+        scroll                   # cuando se hace scroll.
+        beforeunload             # antes de cerrar o recargar.
+        unload                   # al cerrar la página (obsoleto en algunos navegadores).
+    
+    Eventos de arrastrar y soltar (Drag & Drop):
+        dragstart           # empieza a arrastrar un elemento.
+        drag                # mientras se arrastra.
+        dragend             # termina de arrastrar.
+        dragenter           # entra en un área de drop.
+        dragover            # se mantiene sobre un área de drop.
+        dragleave           # sale de un área de drop.
+        drop                # se suelta en el área.
+    
+    Otros eventos útiles:
+        error                   # ocurre un error (en imágenes, scripts…).
+        animationstart          # animaciones CSS.
+        animationend            # animaciones CSS.
+        animationiteration      # animaciones CSS.
+        transitionend           # fin de una transición CSS.
+        touchstart              # eventos táctiles (móvil).
+        touchend                # eventos táctiles (móvil).
+        touchmove               # eventos táctiles (móvil).
+        wheel                   # movimiento de rueda del ratón.
+
+    
 
 
+"""
+nodos = """ 
+# El DOM es la representacion de la memoria de una pagina HTML, como un arbol de nodos. 
+  En la que cada elemento es un nodo que forma parte del nodo principal, el document
 
+    Los principares tipos de nodos son:
+        - ELEMENT_NODE          # son la etiquetas como div
+        - TEXT_NODE             # texto
+        - ATTRIBUTE_NODE        # atributos de las etiquetas
+        - DOCUMENT_NODE         # el objeto document
+        - COMMENT_NODE          # comentarios <!-- ... -->
+
+"""
