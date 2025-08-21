@@ -531,3 +531,65 @@ nodos = """
         - COMMENT_NODE          # comentarios <!-- ... -->
 
 """
+ejemplos ="""
+# Ejemplos de funciones que por relevancia o por cuestianes didacticas son interesantes
+
+    document.addEventListener("DOMContentLoaded", () => {                                #1
+        document.querySelectorAll("button").forEach(button => {                          #2
+            button.onclick = () => {                                                     #3
+                document.querySelector("#hello").style.color = button.dataset.color;
+            }
+        });
+    });
+
+    #1 Esta es una importante funcion que obliga a esperar que se haya cargado por completo el DOM
+    para ejecutar el codigo, es util para evitar errores
+    #2 Un simple ejemplo de la conbinacion de sellecionar todos los elementos(querySelectorAll), 
+       recorrerlos (forEach) y les asigna una funcion
+    #3 cada botton tiene una funcion onclick, pero es mas optimo usar button.addEventListener("click",)
+"""
+arrowFunction = """ 
+# Es un tipo de funcion sin nombre muy usada en js, es una abreviacion:
+    - sin variables
+        const x = () => console.log("Hola x");
+    - con una variable
+        const x = n => n * n;
+    - con varias variables:
+        const x = (m, n) => m + b;
+"""
+tiempoJS = """ 
+# Hay dos funciones principalmente pare el manejo de tiempo, ambas se rigen por milisegundos:
+    - setTimeout(), ejecuta una funcion una vez despues de un tiempo x:
+        setTimeout(() => {
+        console.log("paso un segundo")}, 1000);
+    - setIntervals(), ejecuta una funcion cada x tiempo:
+        setInterval(() => {
+            console.log("Esto se muestra cada segundo");
+        }, 1000);  # cada 1 segundo
+    
+    # Ambas se pueden parar con clearInterval() y clearTimeout () aunq para ello deberas ligarlas a una variable
+
+"""
+AlmacenamientoLocal = """ 
+    - localStorage es un almacen clave-valor en el navegador, persistente y ligado al dominio 
+        Condiciones:
+            -liga el almacenimiento al dominio, sin configurarlo especialmente ni subdominios
+            - Capacidad variable dependiendo del navegador (5 a 10 mb)
+            - Acceso sincrono
+            - Solo strings por lo que requiere serializar
+            - Inseguro
+            - No expira automaticamente
+            - no envia al servidor
+            - API JS sencilla
+
+        Metodos principales:
+            localStorage.setItem("usuario", "Ana");         # Guardar un valor
+            let user = localStorage.getItem("usuario");     # Recuperar un valor
+            localStorage.removeItem("usuario");             # Eliminar un valor
+            localStorage.clear();                           # Vaciar todo       
+            let total = localStorage.length;                # Número de elementos guardados        
+            let clave = localStorage.key(0);                # Acceso por índice (poco usado)
+    
+    - sessionStorage es un almacen muy similar a local, pero esta ligado a la pestaña y los datos son eliminados cuando esta se cierra
+"""
+
