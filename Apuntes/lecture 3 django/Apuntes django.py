@@ -548,6 +548,8 @@ ejemplos ="""
        recorrerlos (forEach) y les asigna una funcion
     #3 cada botton tiene una funcion onclick, pero es mas optimo usar button.addEventListener("click",)
 """
+
+# Basicos
 arrowFunction = """ 
 # Es un tipo de funcion sin nombre muy usada en js, es una abreviacion:
     - sin variables
@@ -570,6 +572,8 @@ tiempoJS = """
     # Ambas se pueden parar con clearInterval() y clearTimeout () aunq para ello deberas ligarlas a una variable
 
 """
+
+# Django
 AlmacenamientoLocal = """ 
     - localStorage es un almacen clave-valor en el navegador, persistente y ligado al dominio 
         Condiciones:
@@ -593,7 +597,7 @@ AlmacenamientoLocal = """
     - sessionStorage es un almacen muy similar a local, pero esta ligado a la pestaña y los datos son eliminados cuando esta se cierra
 """
 APIs = """ 
-    
+
     -AJAX nos permite acceder a informacion de paginas externas, a trabes de la funcion fetch(), puedes
     solicitar informacion y recibir una promise, es una respuesta no instantane. Se usa cuando la promesa se cumple o se deniega
     ###
@@ -619,3 +623,52 @@ APIs = """
        
     
 """
+
+########################             IU             ########################    
+
+# divs
+paginas = """ 
+    Un ejemplo de cambio de elementos de una pagina
+    ###
+        
+        window.onpopstate = function(event) {                                           #1
+            console.log(event.state.section);
+            showSection(event.state.section);
+        }
+
+        function showSection(section) {                                                 #2
+            fetch(`/sections/${section}`)
+            .then(response => response.text())
+            .then(text => {
+                console.log(text);
+                document.querySelector('#content').innerHTML = text;
+            });
+
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {                      #3
+            document.querySelectorAll('button').forEach(button => {
+                button.onclick = function() {
+                    const section = this.dataset.section;
+
+                    history.pushState({section: section}, "", `section${section}`);     #4
+                    showSection(section);
+                };
+            }); 
+        });
+    ###
+
+    #1. window.onpopstate Establece que hara el navegador cuando den atras
+    #2. hace una api al servidor para saber que section acceder
+    #3. da a cada boton la funcion de establecer la seccion y llamar la funcion #2
+    #4. history.pushState modifica el historial de navegacion
+
+"""
+ventana = """ 
+    window.innerWidth               # Ancho de la ventana en píxeles
+    window.innerHeight              # Altura de la ventana en píxeles
+    window.scrollY:                 # cuantos píxeles hemos recorrido desde la parte superior
+    document.body.offsetHeight:     # La altura en píxeles de todo el documento
+"""
+     
+
