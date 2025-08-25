@@ -592,4 +592,30 @@ AlmacenamientoLocal = """
     
     - sessionStorage es un almacen muy similar a local, pero esta ligado a la pestaña y los datos son eliminados cuando esta se cierra
 """
-
+APIs = """ 
+    
+    -AJAX nos permite acceder a informacion de paginas externas, a trabes de la funcion fetch(), puedes
+    solicitar informacion y recibir una promise, es una respuesta no instantane. Se usa cuando la promesa se cumple o se deniega
+    ###
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('https://api.exchangeratesapi.io/latest?base=USD')
+            .then(response => response.json())    # Espera a la respuesta y hace una promesa de dato convertido en json
+            .then(data => {                       # Cuando el dato llega lo gestiona 
+                console.log(data);
+            });
+            .catch(error => {                     #
+                console.log('Error:', error);
+        });
+    ###
+    La parte interesante es que fetch en realidad no es el AJAx perse, es una peticion de HTTP desde el navegador,
+    la respuesta son siempre promesas de llegar un dato en algun momento, algunas veces un no, al ser datos asincronos,
+    no pueden guardarse normal sin un trato especial
+    La respuesta se puede convertir en:
+        response.text()             # devuelve una promesa con el cuerpo como string.
+        response.json()             # devuelve una promesa que parsea el cuerpo como JSON.
+        response.blob()             # devuelve un Blob (para archivos).
+        response.formData()         # devuelve un FormData.
+        response.arrayBuffer()      # devuelve datos binarios.
+       
+    
+"""
