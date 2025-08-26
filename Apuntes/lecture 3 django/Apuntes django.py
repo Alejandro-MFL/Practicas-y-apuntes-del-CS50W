@@ -670,5 +670,83 @@ ventana = """
     window.scrollY:                 # cuantos píxeles hemos recorrido desde la parte superior
     document.body.offsetHeight:     # La altura en píxeles de todo el documento
 """
-     
+animaciones = """ 
+    - Establecemos las fases de la animacion
+        1º Opcion:
+        ###
+            @keyframes animation_name {
+                from {
+                    /* Some styling for the start */
+                }
+
+                to {
+                    /* Some styling for the end */
+                }
+            }
+        ###
+        2º Opcion:
+        ###
+            @keyframes animation_name {
+                0% {
+                    /* Some styling for the start */
+                }
+
+                75% {
+                    /* Some styling after 3/4 of animation */
+                }
+
+                100% {
+                    /* Some styling for the end */
+                }
+            }
+        ###
+    
+    - en <style> aplicas a un elemento
+        animation-name: x;
+        animation-duration: 1s;
+        animation-fill-mode: y;         # 1
+        position: relative;             # Si quieres modificar su posicion
+
+        #1. y puede tomar los siguientes valores :
+            none        # Solo se ven los cambios mientras dura la animación
+            forwards    # El elemento se queda con el estilo del último keyframe al terminar
+            backwards   # El elemento adopta el estilo del primer keyframe hasta que empiece la animacion
+            both        # Combina forwards + backwards
+
+
+
+"""  
+
+# REACT
+inicio = """ 
+    Ejemplo de inicio de REACT:
+    ###
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>                              #1
+                <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+                <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+                <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+                <title>Hello</title>
+            </head>
+            <body>
+                <div id="app"></div>            #2
+
+                <script type="text/babel">      #3
+                    function App() {            #4
+                        return (
+                            <div>
+                                Hello!
+                            </div>
+                        );
+                    }
+
+                    ReactDOM.render(<App />, document.querySelector("#app"));
+                </script>
+            </body>
+        </html>
+    ###
+
+    
+"""
 
