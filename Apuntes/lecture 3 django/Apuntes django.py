@@ -723,17 +723,17 @@ inicio = """
     ###
         <!DOCTYPE html>
         <html lang="en">
-            <head>                              #1
+            <head>                                                              #1
                 <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
                 <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
                 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
                 <title>Hello</title>
             </head>
             <body>
-                <div id="app"></div>            #2
+                <div id="app"></div>                                            #2
 
-                <script type="text/babel">      #3
-                    function App() {            #4
+                <script type="text/babel">                                      #3
+                    function App() {                                            #4
                         return (
                             <div>
                                 Hello!
@@ -741,12 +741,35 @@ inicio = """
                         );
                     }
 
-                    ReactDOM.render(<App />, document.querySelector("#app"));
+                    ReactDOM.render(<App />, document.querySelector("#app"));   #5
                 </script>
             </body>
         </html>
     ###
 
+    #1. Son la conexion con React, 
+        - React: Define los componentes y su comportamiento.
+        - ReactDOM:Toma componentes de React y los inserta en el DOM
+        - Babel: Traduce de JSX , el lenguaje en el que escribiremos en React,
+        
+    #2. El div vacio en el que rellenaremos desde codigo
+    #3. Añadimos la etiqueta de que ha de traducirse con babel
+    #4. Creamos el componente app, que en react pueden ser funciones
+    #5. Renderiza la funcion con dos argumentos:
+        - El componente a renderizar 
+        - El elemento del DOM donde se representa el componente
     
 """
+sistaxisR = """ 
+    argumentos:
+        function Hello(props) {
+            return (
+                <h1>Hello, {props.name}!</h1>
+            );
+        }
 
+
+        <Hello name="Ron" />
+
+    
+"""
