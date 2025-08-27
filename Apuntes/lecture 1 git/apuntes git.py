@@ -1,4 +1,4 @@
-### Apuntes de Funciones  ###
+###########################       Apuntes de Funciones       ###########################
 
 # Configuracion global
 configuracion = """ 
@@ -13,13 +13,11 @@ configuracion = """
         git config --list           # Lista todas las configuraciones activas y su origen
 """
 
-
 # Inicio de repositorio
 InitAndClone = """ 
     git init            # Para iniciar uno nuevo
     git clone URL       # Para clonar uno preexistente
 """
-
 
 # Ver estado
 estado = """ 
@@ -30,7 +28,6 @@ historial = """
     git log             # Muestra el historial de commits
     git remote -v       # Muestra las URLs de repositorios remotos
 """
-
 
 # Añadir elementos
 adds = """ 
@@ -46,7 +43,6 @@ stash = """
     git stash pop       # Recupera los cambios guardados por git stash
 """
 
-
 # Deshacer cambios
 restaurarResetear = """ 
     git restore x       # Quita los elementos no confirmados del archivo x
@@ -56,14 +52,12 @@ restaurarResetear = """
         origin/main
 """
 
-
 # Sincronizacion con remoto
 pullPushFetch = """
     git pull            # Descarga y combina cambios del repositorio remoto a tu rama local
     git push            # Sube tus commits al repositorio remoto
     git fetch           # Descarga cambios del remoto pero sin fusionarlos
 """
-
 
 # Ramas
 branchs = """ 
@@ -88,7 +82,7 @@ Merge Conflicts:
 """
 
 
-### Apuntes teoricos ###
+###########################       Apuntes teoricos       ###########################
 
 # Areas de trabajo
 area = """ 
@@ -99,5 +93,19 @@ area = """
 """
 paginaWeb = """ 
     x.github.io     # Para hacer una pagina en github añadir .github.io al nombre del repositorio al crearlo
+"""
+
+# Proyectos grandes
+CI_CD = """
+# Son las siglas de Integración Continua y Entrega Continua , es un conjunto de buenas prácticas de desarrollo de software   
+    Tiene dos partes:
+        -Integración continua:
+            Fusiones frecuentes a la rama principal
+             # Esto permite afrontar los pequeños conflictos facilmente 
+            Pruebas unitarias automatizadas con cada fusión
+             # Permite aislar las partes del problema que surgan en las pequeñas fusiones
+        -Entrega continua:
+            Cronogramas de lanzamiento cortos, lo que significa que se lanzan nuevas versiones de una aplicación con frecuencia.
+             # Permite aislar los problemas de cada lanzamiento y que los usuarios se adapten progresivamente a los pequeños cambios
 """
 

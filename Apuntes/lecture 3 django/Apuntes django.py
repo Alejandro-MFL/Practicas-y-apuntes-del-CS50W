@@ -194,6 +194,10 @@ admins = """
         save_on_top                     # pone botones de guardar también arriba.
         show_full_result_count          # muestra el número total de resultados
 """
+tests = """ 
+# Es un archivo con TestCase importado, se usa para probar una aplicacion, funciona similar a unittest
+  desarrollado mas en # Test djangoTest
+"""
 
 # Funciones basicas
 shell = """ 
@@ -336,18 +340,203 @@ asserts = """
                 File "assert.py", line 4, in <module>
                     assert square(10) == 100
                 AssertionError
-"""
-test_sh = """ 
-# Son archivos acabados en .sh, en los que puedes hacer pruebas en terminal si hacerlas una por una
-    ###
-        python3 -c "from tests0 import test_prime; test_prime(1, False)"
-        python3 -c "from tests0 import test_prime; test_prime(2, True)"
-        python3 -c "from tests0 import test_prime; test_prime(8, False)"
-        python3 -c "from tests0 import test_prime; test_prime(11, True)"
-        python3 -c "from tests0 import test_prime; test_prime(25, False)"
-    ###
-    requiere un archivo de pruebas, en este caso tests0, en el que agreges una prueba a fallo
     
+    En django, se expande los metodos de assert
+        - Logicas
+            assertTrue(x) 
+            assertFalse(x)
+        - Igualdad
+            assertIs(x, y) 
+            assertIsNot(x, y)
+            assertIsNone(x) 
+            assertIsNotNone(x) 
+        - Comparacion
+            assertGreater(x, z) 
+            assertGreaterEqual(x, z) 
+            assertLess(x, z) 
+            assertLessEqual(x, z) 
+        - Pertenencia y tipo
+            assertIn(x, y) 
+            assertNotIn(x, y) 
+            assertIsInstance(obj, cls) 
+            assertNotIsInstance(obj, cls) 
+        - Excepciones
+            assertRaises(exc, func, *args, **kwargs) 
+             # pasa si func lanza excepción exc                     
+            assertRaisesRegex(exc, regex, func, ...) 
+             # igual pero comprobando el mensaje de error
+        - Advertencias
+            assertWarns(warning, func, ...)
+            assertWarnsRegex(warning, regex, func, ...)
+        - Regex     # Son cadenas de texto especiales que describe un patrón de búsqueda
+            assertRegex(text, regex) → pasa si text hace match con regex
+            assertNotRegex(text, regex) → pasa si no hace match      
+        - Coleccion
+            assertCountEqual(x, z) 
+             # pasa si x y z tienen los mismos elementos (sin importar orden)
+"""
+testMultiples = """ 
+# Hay distintas formas, bastante similares
+
+    - Archivos x.sh:
+    # Son archivos acabados en .sh, en los que puedes hacer pruebas en termi
+      es mejor que hacerlo a mano pero no muy rapido
+        ###
+            python3 -c "from tests0 import test_prime; test_prime(1, False)"
+            python3 -c "from tests0 import test_prime; test_prime(2, True)"
+            python3 -c "from tests0 import test_prime; test_prime(8, False)"
+            python3 -c "from tests0 import test_prime; test_prime(11, True)"
+            python3 -c "from tests0 import test_prime; test_prime(25, False)"
+        ###
+        requiere un archivo de pruebas, en este caso tests0, en el que agreges una prueba a fallo
+
+    - Archivo.py con unittest:
+    # Es una importacion de una biblioteca de py, chequeas funciones directamente
+      tiene la ventaja de añadir un codestring que explica la prueba y usa menos archivos q un x.sh
+        ###
+            # importar unittest y las funciones a testear
+            import unittest
+            from prime import is_prime
+
+            # una clase con las funciones a testear
+            class Tests(unittest.TestCase):
+
+                def test_1(self):
+                    ***Check that 1 is not prime.***
+                    self.assertFalse(is_prime(1))
+
+                def test_2(self):
+                    ***Check that 2 is prime.***
+                    self.assertTrue(is_prime(2))
+
+                def test_8(self):
+                    ***Check that 8 is not prime.***
+                    self.assertFalse(is_prime(8))
+
+                def test_11(self):
+                    ***Check that 11 is prime.***
+                    self.assertTrue(is_prime(11))
+
+            # ejecutar cada prueba
+            if __name__ == "__main__":
+                unittest.main()
+                    ###
+"""
+djangoTest = """ 
+# Es un sistema muy similar a unittest, funciona con un db de prueba que tienes que crear previamente
+puedes trabajar con una copia importada o con la real, pero esto no es aconsejable.
+
+    - Respecto a la db, se crea y migra un db temporal que se limpiara y vaciara con cada prueba
+      para asegurar repetibilidad y q no se ensucia la db
+    - Ejemplo de formato, es muy similar a unittest:    
+    ###
+        class FlightTestCase(TestCase):
+
+            def setUp(self):
+
+                # creas los distintos elementos de la db que usaras en las pruebas
+
+                a1 = Airport.objects.create(code="AAA", city="City A")
+                a2 = Airport.objects.create(code="BBB", city="City B")
+
+                Flight.objects.create(origin=a1, destination=a2, duration=100)
+                Flight.objects.create(origin=a1, destination=a1, duration=200)
+                Flight.objects.create(origin=a1, destination=a2, duration=-100)
+
+                # Despues las funciones de prueba
+
+                def test_departures_count(self):
+                    a = Airport.objects.get(code="AAA")
+                    self.assertEqual(a.departures.count(), 3)
+                
+                def test_valid_flight(self):
+                    a1 = Airport.objects.get(code="AAA")
+                    a2 = Airport.objects.get(code="BBB")
+                    f = Flight.objects.get(origin=a1, destination=a2, duration=100)
+                    self.assertTrue(f.is_valid_flight())
+
+                def test_invalid_flight_duration(self):
+                    a1 = Airport.objects.get(code="AAA")
+                    a2 = Airport.objects.get(code="BBB")
+                    f = Flight.objects.get(origin=a1, destination=a2, duration=-100)
+                    self.assertFalse(f.is_valid_flight())
+
+                def test_index(self):                   #1
+
+                    # Se crea un cliente
+                    c = Client()                    
+                    response = c.get("/flights/")
+                    # Se revisa el codigo devuelto
+                    self.assertEqual(response.status_code, 200)
+
+                    # Se hace una prueba de un elemento
+                    self.assertEqual(response.context["flights"].count(), 3)
+                
+                def test_invalid_flight_page(self):     #2 
+                    max_id = Flight.objects.all().aggregate(Max("id"))["id__max"]
+
+                    c = Client()
+                    response = c.get(f"/flights/{max_id + 1}")
+                    self.assertEqual(response.status_code, 404)
+    ###
+    #1 La penultima prueba es un ejemplo de pruebas de cliente, django simula el acceso de
+     un cliente a la pagina, crea el cliente, revisa el codigo y aplica la prueba x
+    #2 En la ultima, utiliza el comando Max, para usarlo requiere que se agrege el import: 
+     from django.db.models import Max. Con max_id se agrega el total de ids
+"""
+selenio = """ 
+# Aunque django ya pueda implementar pruebas de cliente, el framework de selenio nos facilita esto de forma visual
+    Requiere una configuracion basica:
+     ###
+        import os
+        import pathlib
+        import unittest
+
+        from selenium import webdriver
+
+        def file_uri(filename):
+            return pathlib.Path(os.path.abspath(filename)).as_uri()
+
+        driver = webdriver.Chrome()
+     ###
+  
+    Despues puedes establecer las pruebas correspondientes que tu uses, siguiendo el metodo de
+     unittest
+    ###
+        class WebpageTests(unittest.TestCase):
+
+            def test_title(self):
+                ***Make sure title is correct***
+                driver.get(file_uri("counter.html"))
+                self.assertEqual(driver.title, "Counter")
+
+            def test_increase(self):
+                ***Make sure header updated to 1 after 1 click of increase button***
+                driver.get(file_uri("counter.html"))
+                increase = driver.find_element_by_id("increase")
+                increase.click()
+                self.assertEqual(driver.find_element_by_tag_name("h1").text, "1")
+
+            def test_decrease(self):
+                ***Make sure header updated to -1 after 1 click of decrease button***
+                driver.get(file_uri("counter.html"))
+                decrease = driver.find_element_by_id("decrease")
+                decrease.click()
+                self.assertEqual(driver.find_element_by_tag_name("h1").text, "-1")
+
+            def test_multiple_increase(self):
+                ***Make sure header updated to 3 after 3 clicks of increase button***
+                driver.get(file_uri("counter.html"))
+                increase = driver.find_element_by_id("increase")
+                for i in range(3):
+                    increase.click()
+                self.assertEqual(driver.find_element_by_tag_name("h1").text, "3")
+
+        if __name__ == "__main__":
+            unittest.main()
+    ###
+
+
 """
 
 ########################             SQL            ########################
