@@ -321,6 +321,35 @@ csrf_token = """
 
 """
 
+# Test
+asserts = """ 
+# asserts es un metodo de afirmacion, de tal forma que si no fuera asi da un mensaje
+  de error, un AssertionError
+        ###
+            def square(x):
+                return x + x
+
+            assert square(10) == 100        
+        ###
+            daria el siguiente mensaje Output:
+                Traceback (most recent call last):
+                File "assert.py", line 4, in <module>
+                    assert square(10) == 100
+                AssertionError
+"""
+test_sh = """ 
+# Son archivos acabados en .sh, en los que puedes hacer pruebas en terminal si hacerlas una por una
+    ###
+        python3 -c "from tests0 import test_prime; test_prime(1, False)"
+        python3 -c "from tests0 import test_prime; test_prime(2, True)"
+        python3 -c "from tests0 import test_prime; test_prime(8, False)"
+        python3 -c "from tests0 import test_prime; test_prime(11, True)"
+        python3 -c "from tests0 import test_prime; test_prime(25, False)"
+    ###
+    requiere un archivo de pruebas, en este caso tests0, en el que agreges una prueba a fallo
+    
+"""
+
 ########################             SQL            ########################
 
 # Modelos y migraciones
