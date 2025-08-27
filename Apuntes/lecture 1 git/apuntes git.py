@@ -94,8 +94,19 @@ area = """
 paginaWeb = """ 
     x.github.io     # Para hacer una pagina en github añadir .github.io al nombre del repositorio al crearlo
 """
+pestañas = """ 
+    - codigo: nos permite ver los archivos y carpetas dentro de nuestro directorio
+    - problemas: podemos abrir y cerrar problemas, 
+      que son solicitudes de corrección de errores o nuevas funciones
+    - Pull request: Solicitudes de quienes desean fusionar código de una rama con otra.
+      permite realizar revisiones de código donde se comentan y ofrecen sugerencias antes
+      de integrar el código en la rama maestra
+    - Acciones de GitHub : esta es la pestaña que usaremos cuando trabajemos en integración
+      continua, ya que proporciona registros de las acciones que se han realizado 
+      después de cada envío
+"""
 
-# Proyectos grandes
+# GitHub Actions
 CI_CD = """
 # Son las siglas de Integración Continua y Entrega Continua , es un conjunto de buenas prácticas de desarrollo de software   
     Tiene dos partes:
@@ -108,4 +119,39 @@ CI_CD = """
             Cronogramas de lanzamiento cortos, lo que significa que se lanzan nuevas versiones de una aplicación con frecuencia.
              # Permite aislar los problemas de cada lanzamiento y que los usuarios se adapten progresivamente a los pequeños cambios
 """
+YAML = """ 
+# Es un lenguaje configurado que estructura sus datos por clave-valor. 
+    Permite anidar claves en claves, mas de un valor en una clave
+        ###
+            clave1: valor1
+            clave2: 
+                - valor2
+                - valor3
+            clave3:
+                - clave4 : valor4
+                - clave5 : valor5
+        ###
+
+    Los archivos YAML acaban en .yml o .yaml
+
+"""
+estructura = """
+    La estructura de un GitHub Actions es la siguiente:
+    ###
+        name: Testing                           # Nombre del flujo de trabajo
+        on: push                                # Cuando activar el flujo
+
+        jobs:                                   # Trabajo que se activa
+        test_project:                           #1
+            runs-on: ubuntu-latest              # En que maquina virtual se ejecutara
+            steps:                          
+            - uses: actions/checkout@v2         # Que accion de GitHub usara
+            - name: Run Django unit tests       # Nombre descriptivo
+                run: |                          # comandos que se ejecutaran en el servidor
+                    pip3 install --user django
+                    python3 manage.py test
+    ###
+        
+"""
+
 
