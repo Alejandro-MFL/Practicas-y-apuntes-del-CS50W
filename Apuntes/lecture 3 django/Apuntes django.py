@@ -324,6 +324,11 @@ csrf_token = """
     -javascript      "X-CSRFToken": getCookie("csrftoken")
 
 """
+limiteDeVelocidad = """ 
+    Limita la cantidad de solicitudes que un usuario puede realizar en un periodo de tiempo determinado.
+    Esto ayuda a proteger contra ataques de denegación de servicio (DOS) , 
+    en los que un usuario malintencionado realiza tantas llamadas a la API que esta se bloquea.
+"""
 
 # Test
 asserts = """ 
@@ -621,6 +626,62 @@ cicloMigracion = """
         python manage.py showmigrations
     o una concreta con: 
         python manage.py sqlmigrate app_name 0001
+"""
+# Escalabilidad
+servidores = """
+    Localizacion nube/fisico:
+        - En la nuve es mas sencillo, con una inversion inicial menor y 
+         con mayor adaptabilidad
+        - En cambio en fisico-propios el costo es menor a largo plazo y tienes mas 
+         personalizacion y flexibilidad
+
+    Escalabilidad:
+        - Vertical, es el aumento de las capacidades del servidor,
+          sustituirlo por uno mas grande
+        - Horizontal, agregar mas servidores es mas eficiente y evitas que un fallo en un servidor 
+         bloque la web
+    
+    Equilibrio de la carga:
+        # Al tener multiples servidores, el reparto de la carga respecto a los distintos servidores es importante
+        hay tres tipos de distribucion:
+            - Aleatorio
+            - Round-Robin, va alternando cada servidor
+            - Por menos carga
+        Todas las opciones tienen pros y contras entre rendimiento y velocidad de respuesta
+    
+    Almacenamiento de sesiones
+        # Las sesiones de los usuarios y donde se registran es un asunto relevante:
+            - Si las sesiones son persistentes en el servidor que se alojo, 
+             ese usuario siempre tendra que ser enviado a ese servidor, dependiendo completamente de este
+            - Si las seiones de datos se almacenan en una base de datos a la que todos los servidores tengan
+             acceso, el contra es que leer y escribir en base de datos requerira mas procesamiento
+            - Si las sesiones estan en el cliente, por cookies, es lo mejor salvo por el pequeño detalle de
+             que respecto a la seguridad es bastante fragil
+
+"""
+BaseDeDatos = """ 
+    Particionado de tabla       
+        - Vertical: se fragmenta la tabla por columnas
+        - Horizontal: Se fragmenta en varias tablas con las mismas columnas, 
+         normalmente en fucion de una columna, en libros seria subdibidar una biblioteca por cada genero
+
+    Replicacion de bases de datos:      # Finalidad de que un fallo no elimine toda la base de datos
+        - Replicación Primaria Única, una es la operativa, el resto son copias de seguridad que se actualizan 
+         en funcion de la primera
+        - Replicacion multiprimaria, todas son operables, todas se actualizan entre todas. 
+        Que solo una sea operativa nos sigue exponiendo a que cuando falle colapse, 
+         que todas sean operables añade mucha complejidad al haber procesos y actualizaciones simultaneas
+         
+# Toda la base de datos no puede estar almacenada en un unico servidor por punto unico de fallo
+"""
+cache = """ 
+# La memoria cache es una memoria temporal, que puede estar desde el cliente o desde el servidor,
+ se usa para sin tener un gran coste, no tener que cargar elementos que recientemente se han cargado
+    Django proporciona su propio framework de caché
+        - Almacenamiento en caché por vista
+        - Almacenamiento en caché de fragmentos de plantilla
+        - API de caché de bajo nivel
+
 """
 
 ########################          javascript         ########################
