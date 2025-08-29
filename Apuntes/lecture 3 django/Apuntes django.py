@@ -881,7 +881,7 @@ APIs = """
     solicitar informacion y recibir una promise, es una respuesta no instantane. Se usa cuando la promesa se cumple o se deniega
     ###
         document.addEventListener('DOMContentLoaded', function() {
-            fetch('https://api.exchangeratesapi.io/latest?base=USD')
+            fetch('https:#api.exchangeratesapi.io/latest?base=USD')
             .then(response => response.json())    # Espera a la respuesta y hace una promesa de dato convertido en json
             .then(data => {                       # Cuando el dato llega lo gestiona 
                 console.log(data);
@@ -997,48 +997,110 @@ animaciones = """
 """  
 
 # REACT
-inicio = """ 
+crudo = """ 
+# Añades las bibliotecas de REACT, util pedagogicamente, para proyectos se instala
     Ejemplo de inicio de REACT:
-    ###
-        <!DOCTYPE html>
-        <html lang="en">
-            <head>                                                              #1
-                <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
-                <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
-                <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-                <title>Hello</title>
-            </head>
-            <body>
-                <div id="app"></div>                                            #2
+        ###
+            <!DOCTYPE html>
+            <html lang="en">
+                <head>                                                              #1
+                    <script src="https:#unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+                    <script src="https:#unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+                    <script src="https:#unpkg.com/babel-standalone@6/babel.min.js"></script>
+                    <title>Hello</title>
+                </head>
+                <body>
+                    <div id="app"></div>                                            #2
 
-                <script type="text/babel">                                      #3
-                    function App() {                                            #4
-                        return (
-                            <div>
-                                Hello!
-                            </div>
-                        );
-                    }
+                    <script type="text/babel">                                      #3
+                        function App() {                                            #4
+                            return (
+                                <div>
+                                    Hello!
+                                </div>
+                            );
+                        }
 
-                    ReactDOM.render(<App />, document.querySelector("#app"));   #5
-                </script>
-            </body>
-        </html>
-    ###
+                        ReactDOM.render(<App />, document.querySelector("#app"));   #5
+                    </script>
+                </body>
+            </html>
+        ###
 
-    #1. Son la conexion con React, 
-        - React: Define los componentes y su comportamiento.
-        - ReactDOM:Toma componentes de React y los inserta en el DOM
-        - Babel: Traduce de JSX , el lenguaje en el que escribiremos en React,
-        
-    #2. El div vacio en el que rellenaremos desde codigo
-    #3. Añadimos la etiqueta de que ha de traducirse con babel
-    #4. Creamos el componente app, que en react pueden ser funciones
-    #5. Renderiza la funcion con dos argumentos:
-        - El componente a renderizar 
-        - El elemento del DOM donde se representa el componente
-    
+        #1. Son la conexion con React, 
+            - React: Define los componentes y su comportamiento.
+            - ReactDOM:Toma componentes de React y los inserta en el DOM
+            - Babel: Traduce de JSX , el lenguaje en el que escribiremos en React,
+            
+        #2. El div vacio en el que rellenaremos desde codigo
+        #3. Añadimos la etiqueta de que ha de traducirse con babel
+        #4. Creamos el componente app, que en react pueden ser funciones
+        #5. Renderiza la funcion con dos argumentos:
+            - El componente a renderizar 
+            - El elemento del DOM donde se representa el componente    
 """
+instalacionR = """ 
+
+Esquema de carpetas:
+    Base:
+        frontend/
+        │
+        ├── .env                
+        ├── index.html
+        ├── package.json
+        ├── vite.config.js
+        ├── node_modules/         # dependencias instaladas (no se toca)
+        ├── public/               # archivos estáticos públicos 
+        └── src/                  # aquí vive tu código React
+            ├── App.jsx           # componente principal de la aplicación
+            ├── App.css           # componentes concretos de css de App.jpx
+            ├── main.jsx          # punto de entrada: monta React en index.html, no tocar por ahora
+            ├── index.css         # componentes generales de css de toda la pagina
+            └── assets/           # imágenes, estilos, etc.
+
+        -.env variable de entorno expuesta en el cliente
+        - index.html Es el HTML principal, esta vacio, salvo por un <div id="root"></div>, que es donde 
+        se inyectara el codigo
+        - package.json Lista las dependencias (React, Vite, etc.) y scripts (npm run dev, npm run build, npm run preview).
+        - vite.config.js Configuración del bundler Vite (rutas, plugins, etc). Normalmente no lo tocas mucho al inicio.
+        - node_modules/ Carpeta donde npm instala las librerias, no tocar
+        - public/ Contenedor de los archivos estaticos
+        - src/ Carpeta que contiene la aplicacion de REACT
+        - main.jsx primer archivo que se ejecuta; monta <App /> dentro del div id="root" del index.html.
+        - assets/ es un contenedor como public, pero para los elementos que pasan por Vite 
+        (las empaqueta, optimiza y les pone hash para cache busting)
+
+    estructurado de src:
+      src/
+        main.jsx
+        App.jsx                 # En el convergen todos los elementos
+        styles/                 # Donde estan los elementos esteticos, incluido index.css
+        components/             # piezas reutilizables (Button, Modal, Card...)
+        pages/                  # pantallas enrutables
+            Login/
+            Login.jsx
+            Login.module.css
+            Dashboard/
+            Dashboard.jsx
+            Weekend/
+            Weekend.jsx
+            PlanCard.jsx
+        features/               # lógica + UI de dominios concretos
+            auth/
+            api.js              # login, refresh, me
+            useAuth.js          # hook de sesión
+            weekends/
+            api.js              # GET/POST weekends
+            hooks.js            # hooks específicos (useWeekend)
+            plans/
+            api.js              # CRUD de planes
+        lib/
+            http.js               # fetch con baseURL y token
+        assets/
+        index.css  
+
+"""
+
 sistaxisR = """ 
     argumentos:
         function Hello(props) {
