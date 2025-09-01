@@ -578,21 +578,21 @@ CamposModelo = """
 parametrosModelo = """ 
 comunes o casi:
     null	        #Permite NULL en la base de datos	
-    edad = models.IntegerField(null=True)
+        edad = models.IntegerField(null=True)
     blank	        #Permite campo vacío en formularios	
-    bio = models.TextField(blank=True)
+        bio = models.TextField(blank=True)
     default	        #Valor por defecto	
-    activo = models.BooleanField(default=True)
+        activo = models.BooleanField(default=True)
     unique	        #Valor único en la tabla	
-    email = models.EmailField(unique=True)
+        email = models.EmailField(unique=True)
     choices	        #Lista de opciones permitidas	
-    estado = models.CharField(max_length=1, choices=[("B","Borrador"),("P","Publicado")])
+        estado = models.CharField(max_length=1, choices=[("B","Borrador"),("P","Publicado")])
     db_index	    #Crea un índice en la columna	
-    codigo = models.CharField(max_length=20, db_index=True)
+        codigo = models.CharField(max_length=20, db_index=True)
     verbose_name	#Nombre legible en el admin	
-    precio = models.DecimalField(..., verbose_name="Precio (€)")
+        precio = models.DecimalField(..., verbose_name="Precio (€)")
     help_text	    #Texto de ayuda en admin/formularios	
-    email = models.EmailField(help_text="Introduce tu correo")
+        email = models.EmailField(help_text="Introduce tu correo")
 relacion:
     on_delete           # Obligatorio en Django ≥ 2.0, que ocurre si se elimina el origen
          models.CASCADE      # elimina también el objeto hijo.
@@ -614,6 +614,8 @@ migracion = """
     generas una migracion, un archivo que da las instrucciones para traducir el modelo 
     a la sintaxis de la base de datos. 
     Despues procedes con la migracion, siguiendo las instruciones, realizas los cambios en la base de datos 
+
+    Funciones en cicloMigracion
 """
 cicloMigracion = """ 
     - Definir modelo
@@ -1102,6 +1104,9 @@ Esquema de carpetas:
 """
 
 sistaxisR = """ 
+    Encender servidor:
+        npm run dev
+
     argumentos:
         function Hello(props) {
             return (
