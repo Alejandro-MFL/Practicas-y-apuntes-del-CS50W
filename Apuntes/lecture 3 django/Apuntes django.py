@@ -1099,7 +1099,7 @@ Esquema de carpetas:
         lib/
             http.js               # fetch con baseURL y token
         assets/
-        index.css  
+        
 
 """
 
