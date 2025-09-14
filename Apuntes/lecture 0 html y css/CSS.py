@@ -144,9 +144,65 @@ ContenidoFlex="""
 
 """
 Aliniar=""" 
+    -justificacion = justify-content: x; x = ...
+        center          # Al centro sin espacio intermedio
+        space-around    # Deja un espacio al rededor de cada elemento
+        space-between   # Deja el maximo espacio entre los elementos pero sin margen
+        space-evenly    # Deja el mismo espacio entre elementos como en margen
+        flex-star/end   # Los junta como center pero al principio o al final
+        
+    -Aliniar respecto al contenedor = align-items: x
 
+    # En realidad ambos actuan respecto a los ejes de la misma forma (rows/column)
+      si hay mas de una linea se puede alinear el contenido con align-content
+    
+    -Alinear un solo elemento como excepcion = align-self: 
+
+    Aparte, tenemos "gap:" es añadir espacio entre los elementos sin afectar margenes
  """
 
+# Grid
+CuadriculaGrid=""" 
+    Columnas y filas 
+        - grid-template-columns: x; x = ...
+            - por tamaño, o auto(para que sea puesto por el navegador) se añade una columna
+            un elemento especial  son fr, son fraciones del espacio, el total es la suma
+            - auto-fill: ajusta el numero en proporcion de los minimos establecidos
+            - auto-fit: este fuerza el maximo para rellenar huecos 
+        - grid-template.rows actua igual que columns
+        - grid-auto-columns/rows se le puede dar un tamaño por defecto a flias que se creen
+            # repeat(): Se puede usar repeat() para no escribir muchas veces lo mismo
+            # minmax(): Se usa para establecer el minimo y maximo por recursividad
+    
+    Espacios: se usa gap entre elementos y padin para margenes
+
+    Elementos Por la cuadricula
+    # Normalmente es colocan automaticamente pero es modificable
+        - La maniplacion se hace con "grid-row/column-start/end:" puedes establecer donde empieza
+          y donde acaba. tambien se usa "grid-row/column: 2 / 4"
+        - Una forma mas comoda seria darle un tamaño,con "grid-row/column-start: span 2;"
+        - Usando "grid-row/column: 2 / 4" En dos elementos consigues sobreponerlos en el mismo 
+          espacio sin usar absolute
+"""
+AreasGrid=""" 
+    Puedes aplicar nombres de area con "grid-area: header;" para despues aplicar areas con:
+    ###
+        min-height:
+        grid-templete-area:
+            "header header ."              
+            "sidebar content content"
+            "footer footer footer"
+    ###
+        De esta forma establecemos numero de columnas, como se reparten los objetos en esta y
+         puedes dejar un espacio con ".". Ademas puede ser facilmente modificado con una
+         media querie de una forma facil y visual
+"""
+JustificacionGrid=""" 
+    justify-items desde el padre y justify-self y se les puede alinear con align-items/self
+     y tienes alig-content es pare el contenido de la grid.
+    Esto es muy similar a flex
+
+"""
 
 # Herramientas 
 Bootstrap= """ 
