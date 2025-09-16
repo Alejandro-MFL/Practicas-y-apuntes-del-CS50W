@@ -204,6 +204,82 @@ JustificacionGrid="""
 
 """
 
+# Animnaciones
+TransicionesEntreEstados=""" 
+    - Con varios estados es tan sencillo como añadir un transition
+        ###
+            En el padre:
+                transition-duration: 2s;            # Funciona con segundos y milisegundos
+                transition-property: background;    # Ponemos los elementos que anima o all para todos
+                transition-timing-funcion: x;
+                    ease-in                         # Principio lento
+                    ease-out                        # Final lento
+                    ease-in-out                     # Principio y final lento
+                    ease                            # in-out de inicio mas rapido
+                    steps(n)                        # Funciona a pasos ortopedicos
+                    cubic-bezier(x1 y1,x2 y2)       # Controlas la curva de animacion
+                transition-delay: 1s    
+                # Todo esto se puede abreviar con:
+                ###
+                    transition: property duration timing-funcion delay,
+                        property duration timing-funcion delay,
+                ###  
+            En el hijo:
+            # Es igual que en el padre pero afecta solo al inicio y puede solo modificar al padre                                            
+        ###
+"""
+AnimationKeys=""" 
+# Funciona como fotogramas clave
+    - En el que quieres animar pones el nombre de la animacion 
+        ###
+            .pulser{
+                x: y;
+                animation-name: nombre;
+                animation-duration: 2s;
+                animation-timing-funcion: ease;
+                animation-iteration-count: n (or infinite);     # Cuantas veces se repite
+                animacion-direction: reversa or alternate;      # direccion de los frames
+                animation-play-state: pause;
+                animation-fill-mode: 
+                    forwards;                   # Establece el estado final de la animacion como el debido
+                    both;                       # Establede el estado de inicio y el final
+
+                # animation tiene abreviatura como transition, no requiere poner cada estado en cada forma
+                ###
+                    animation: name duration timing-funcion delay fill-mode,
+                        name duration timing-funcion delay fill-mode,h
+
+                ###
+            }
+            # En muchos elementos es igual a "transition"
+        ###
+            
+    - Establecer la animacion
+        ###
+            @keyframes name {
+                from {          # Si es el estado inicial puede ser obviado
+                
+                }
+                to {            # Tambien se pueden poner porcentajes 0% - 50% - 100%
+
+                }
+            }
+        ###
+    
+"""
+
+AnularAnimaciones=""" 
+    Pueden reducirse o anularse si el cliente lo prefiere con una media queri
+    ###
+        @media (prefers-reduced-motion: reduce) {
+            .x {
+                transition: none;
+            }
+        }
+    ###
+
+"""
+
 # Herramientas 
 Bootstrap= """ 
     Bootstrap.com: es una biblioteca de estilos CSS
